@@ -18,7 +18,7 @@ def main():
 
         contact_starting_id += 1
 
-        id = 10
+        id = 1
         contact_from_file = contact_services.get_contact(id)
         if contact_from_file != None:
             print('Contact from file:', contact_from_file)
