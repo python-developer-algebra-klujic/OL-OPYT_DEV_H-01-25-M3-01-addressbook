@@ -20,10 +20,6 @@ def main():
         if next_contact.lower() != 'da':
             break
 
-    print()
-    print(contact_services.contacts)
-    print()
-
 
 if __name__ == '__main__':
     main()

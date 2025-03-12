@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "first_name": "Iva",
+        "last_name": "Ivic",
+        "email": "",
+        "phone": "",
+        "web_profile": ""
+    },
+    {
+        "id": 2,
+        "first_name": "Pero",
+        "last_name": "Peric",
+        "email": "",
+        "phone": "",
+        "web_profile": ""
+    }
+]

@@ -15,7 +15,12 @@ class ContactServices:
         if self.data_source == 'file':
             try:
                 with open('files/contacts.json', 'w') as file_writer:
-                    json.dump(self.contacts, file_writer, indent=4)
+                    # contacts_dict = []
+                    # for contact in self.contacts:
+                    #     contacts_dict.append(contact.__dict__)
+                    contacts_dict = list(map(lambda contact: contact.__dict__, self.contacts))
+                    json.dump(contacts_dict, file_writer, indent=4)
+
             except Exception as ex:
                 print(f'Dogodila se greska u ContactServices.create_contact() snimanje u file. {ex}.')
         else:
