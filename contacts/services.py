@@ -64,7 +64,7 @@ class ContactServices:
             if contact.id == contact_id:
                 del self.contacts[index]
 
-
+        # Commit
         if self.data_source == 'file':
             try:
                 with open('files/contacts.json', 'w') as file_writer:
