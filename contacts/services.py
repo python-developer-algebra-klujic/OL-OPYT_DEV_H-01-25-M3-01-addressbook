@@ -45,12 +45,12 @@ class ContactServices:
                     self.contacts = list(map(lambda contact_dict: self.map_dict_to_contact(contact_dict),
                                              contacts_from_file))
             except Exception as ex:
-                pass
+                print(f'Dogodila se greska u ContactServices.get_all_contacts() citanje iz filea. {ex}.')
         else:
             try:
                 pass
             except Exception as ex:
-                pass
+                print(f'Dogodila se greska u ContactServices.get_all_contacts() citanje iz baze. {ex}.')
 
         return self.contacts
 
