@@ -3,8 +3,11 @@ from contacts.services import ContactServices
 
 
 def main():
-    contact_starting_id = 1
     contact_services = ContactServices()
+    if len(contact_services.contacts) > 0:
+        contact_starting_id = contact_services.contacts[-1].id + 1
+    else:
+        contact_starting_id = 1
 
     while True:
         first_name = input('Upisite ime kontakta: ')

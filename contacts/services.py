@@ -64,7 +64,7 @@ class ContactServices:
         #       deleted_at = datetime.now()
         pass
 
-    def map_dict_to_contact(contact_dict) -> Contact:
+    def map_dict_to_contact(self, contact_dict) -> Contact:
         temp_contact = Contact(
             id = contact_dict['id'],
             first_name = contact_dict['first_name'],
