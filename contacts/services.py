@@ -39,7 +39,6 @@ class ContactServices:
                 return contact_from_list
         return None
 
-
     def get_all_contacts(self) -> List[Contact]:
         if self.data_source == 'file':
             try:
@@ -61,11 +60,35 @@ class ContactServices:
         pass
 
     def delete_contact(self, contact_id: int):
-        # Dohvati mi iz datoteke kontakt koji ima identican Id kao i contact_id.
-        # Izbrisi taj kontakt iz datoteke tako da promijenimo:
-        #       is_deleted = True
-        #       deleted_at = datetime.now()
-        pass
+        for index, contact in enumerate(self.contacts):
+            if contact.id == contact_id:
+                del self.contacts[index]
+
+
+        if self.data_source == 'file':
+            try:
+                with open('files/contacts.json', 'w') as file_writer:
+                    # contacts_dict = []
+                    # for contact in self.contacts:
+                    #     contacts_dict.append(contact.__dict__)
+                    contacts_dict = list(map(lambda contact: contact.__dict__, self.contacts))
+                    json.dump(contacts_dict, file_writer, indent=4)
+
+            except Exception as ex:
+                print(f'Dogodila se greska u ContactServices.create_contact() snimanje u file. {ex}.')
+        else:
+            try:
+                print('Potrebno je implementirati snimanje u bazu!!!')
+                # TODO snimi u bazu
+                pass
+            except Exception as ex:
+                print(f'Dogodila se greska u ContactServices.create_contact() snimanje u bazu. {ex}.')
+        # TODO
+        # Izdvojiti u zasebnu metodu
+        # contact_to_delete.is_deleted = True
+        # contact_to_delete.deleted_at = datetime.now()
+
+
 
     def map_dict_to_contact(self, contact_dict) -> Contact:
         temp_contact = Contact(

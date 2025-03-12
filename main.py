@@ -25,6 +25,8 @@ def main():
         else:
             print(f'Ne postoji kontakt u bazi s {id} ID')
 
+        contact_services.delete_contact(3)
+
         print()
         next_contact = input('Zelite li dodati novi kontatk? (da/ne): ')
         if next_contact.lower() != 'da':
