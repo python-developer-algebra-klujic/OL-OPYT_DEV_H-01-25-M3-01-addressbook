@@ -14,7 +14,7 @@ class ContactServices:
         self.contacts.append(contact)
         if self.data_source == 'file':
             try:
-                with open('contacts.json', 'w') as file_writer:
+                with open('files/contacts.json', 'w') as file_writer:
                     json.dump(self.contacts, file_writer, indent=4)
             except Exception as ex:
                 print(f'Dogodila se greska u ContactServices.create_contact() snimanje u file. {ex}.')

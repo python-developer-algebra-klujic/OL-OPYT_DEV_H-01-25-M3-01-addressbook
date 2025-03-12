@@ -1,20 +1,28 @@
 from contacts.models import Contact
-from contacts.services import create_contact
+from contacts.services import ContactServices
 
 
 def main():
-    while True:
-        first_name = input('Upisite ime kontakt: ')
-        last_name = input('Upisite prezime kontakt: ')
-        contact = Contact(first_name, last_name)
+    contact_starting_id = 1
+    contact_services = ContactServices()
 
-        # TODO Ispravno pozvati ovu funkciju
-        create_contact(contact)
+    while True:
+        first_name = input('Upisite ime kontakta: ')
+        last_name = input('Upisite prezime kontakta: ')
+        contact = Contact(id=contact_starting_id, first_name=first_name, last_name=last_name)
+
+        contact_services.create_contact(contact)
+
+        contact_starting_id += 1
 
         print()
         next_contact = input('Zelite li dodati novi kontatk? (da/ne): ')
         if next_contact.lower() != 'da':
             break
+
+    print()
+    print(contact_services.contacts)
+    print()
 
 
 if __name__ == '__main__':
