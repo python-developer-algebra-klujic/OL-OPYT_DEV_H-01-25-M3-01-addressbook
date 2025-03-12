@@ -7,8 +7,10 @@ class ContactServices:
     def __init__(self,
                  data_source: str = 'file',
                  contacts: List[Contact] = []):
-        self.contacts = contacts
         self.data_source = data_source
+        self.contacts = contacts
+
+        self.get_all_contacts()
 
     def create_contact(self, contact: Contact) -> None:
         self.contacts.append(contact)
@@ -36,8 +38,21 @@ class ContactServices:
         pass
 
     def get_all_contacts(self) -> List[Contact]:
-        # Dohvati mi sve kontakte iz datoteke bez obzira koji Id imaju.
-        pass
+        if self.data_source == 'file':
+            try:
+                with open('files/contacts.json', 'r') as file_reader:
+                    contacts_from_file = json.load(file_reader)
+                    self.contacts = list(map(lambda contact_dict: self.map_dict_to_contact(contact_dict),
+                                             contacts_from_file))
+            except Exception as ex:
+                pass
+        else:
+            try:
+                pass
+            except Exception as ex:
+                pass
+
+        return self.contacts
 
     def update_contact(self, contact: Contact):
         pass
@@ -48,3 +63,15 @@ class ContactServices:
         #       is_deleted = True
         #       deleted_at = datetime.now()
         pass
+
+    def map_dict_to_contact(contact_dict) -> Contact:
+        temp_contact = Contact(
+            id = contact_dict['id'],
+            first_name = contact_dict['first_name'],
+            last_name = contact_dict['last_name'],
+            email = contact_dict['email'],
+            phone = contact_dict['phone'],
+            web_profile = contact_dict['web_profile']
+        )
+
+        return temp_contact
