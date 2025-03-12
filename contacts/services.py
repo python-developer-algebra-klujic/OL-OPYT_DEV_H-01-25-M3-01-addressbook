@@ -34,8 +34,11 @@ class ContactServices:
                 print(f'Dogodila se greska u ContactServices.create_contact() snimanje u bazu. {ex}.')
 
     def get_contact(self, contact_id: int) -> Contact:
-        # Dohvati mi iz datoteke kontakt koji ima identican Id kao i contact_id.
-        pass
+        for contact_from_list in self.contacts:
+            if contact_from_list.id == contact_id:
+                return contact_from_list
+        return None
+
 
     def get_all_contacts(self) -> List[Contact]:
         if self.data_source == 'file':
