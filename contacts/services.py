@@ -1,3 +1,4 @@
+import json
 from typing import List
 from contacts.models import Contact
 
@@ -11,11 +12,10 @@ class ContactServices:
 
     def create_contact(self, contact: Contact) -> None:
         self.contacts.append(contact)
-        # slijedeci korak
-        # Provjera data_source: ako je file snimamo u file, a ako je db snimamo u bazu
         if self.data_source == 'file':
             try:
-                pass
+                with open('contacts.json', 'w') as file_writer:
+                    json.dump(self.contacts, file_writer, indent=4)
             except Exception as ex:
                 print(f'Dogodila se greska u ContactServices.create_contact() snimanje u file. {ex}.')
         else:
@@ -26,53 +26,20 @@ class ContactServices:
             except Exception as ex:
                 print(f'Dogodila se greska u ContactServices.create_contact() snimanje u bazu. {ex}.')
 
+    def get_contact(self, contact_id: int) -> Contact:
+        # Dohvati mi iz datoteke kontakt koji ima identican Id kao i contact_id.
+        pass
 
+    def get_all_contacts(self) -> List[Contact]:
+        # Dohvati mi sve kontakte iz datoteke bez obzira koji Id imaju.
+        pass
 
+    def update_contact(self, contact: Contact):
+        pass
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def get_contact(contact_id: int) -> Contact:
-    # Dohvati mi iz datoteke kontakt koji ima identican Id kao i contact_id.
-    pass
-
-
-def get_all_contacts() -> List[Contact]:
-    # Dohvati mi sve kontakte iz datoteke bez obzira koji Id imaju.
-    pass
-
-
-def update_contact(contact: Contact):
-    pass
-
-
-def delete_contact(contact_id: int):
-    # Dohvati mi iz datoteke kontakt koji ima identican Id kao i contact_id.
-    # Izbrisi taj kontakt iz datoteke tako da promijenimo:
-    #       is_deleted = True
-    #       deleted_at = datetime.now()
-    pass
+    def delete_contact(self, contact_id: int):
+        # Dohvati mi iz datoteke kontakt koji ima identican Id kao i contact_id.
+        # Izbrisi taj kontakt iz datoteke tako da promijenimo:
+        #       is_deleted = True
+        #       deleted_at = datetime.now()
+        pass
