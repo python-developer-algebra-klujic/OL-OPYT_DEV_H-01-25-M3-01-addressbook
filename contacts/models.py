@@ -20,6 +20,9 @@ class Person:
         if len(self.vat_id) != 11:
             print(f'!!! OIB mora imati 11 brojki. Vi ste unijeli: {len(self.vat_id)}.')
 
+    def __repr__(self):
+        return f'Person ID: {self.id}.'
+
 
 
 class Contact(Person):
