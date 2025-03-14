@@ -1,6 +1,12 @@
 
 
 
+class Person:
+    def __init__(self):
+        pass
+
+
+
 class Contact:
     def __init__(self,
                  id: int,
