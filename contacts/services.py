@@ -1,6 +1,7 @@
 import json
 from typing import List
 from contacts.models import Contact
+from repositories.file_repository import FileRepository
 
 
 class ContactServices:
@@ -15,16 +16,9 @@ class ContactServices:
     def create_contact(self, contact: Contact) -> None:
         self.contacts.append(contact)
         if self.data_source == 'file':
-            try:
-                with open('files/contacts.json', 'w') as file_writer:
-                    # contacts_dict = []
-                    # for contact in self.contacts:
-                    #     contacts_dict.append(contact.__dict__)
-                    contacts_dict = list(map(lambda contact: contact.__dict__, self.contacts))
-                    json.dump(contacts_dict, file_writer, indent=4)
+            file_repo = FileRepository()
+            file_repo.write_to_file(self.contacts)
 
-            except Exception as ex:
-                print(f'Dogodila se greska u ContactServices.create_contact() snimanje u file. {ex}.')
         else:
             try:
                 print('Potrebno je implementirati snimanje u bazu!!!')
