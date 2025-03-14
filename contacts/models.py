@@ -38,9 +38,27 @@ class Contact(Person):
                          phone=phone,
                          website=website)
 
-
         self.first_name = first_name
         self.last_name = last_name
 
     def __repr__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class Company(Person):
+    def __init__(self,
+                 name:str,
+                 headquarter: str,
+
+                 id: int,
+                 vat_id: str = '',
+                 email: str = '',
+                 phone: str = '',
+                 website: str = ''):
+        super().__init__(id, vat_id, email, phone, website)
+
+        self.name = name
+        self.headquarter = headquarter
+
+    def __repr__(self):
+        return f'{self.name} ({self.headquarter})'
