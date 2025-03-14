@@ -1,4 +1,4 @@
-from contacts.models import Contact
+from contacts.models import Company, Contact
 from contacts.services import ContactServices
 
 
@@ -16,9 +16,19 @@ def main():
                           first_name=first_name,
                           last_name=last_name,
                           vat_id='123456')
-
         print(contact)
         print(contact.vat_id)
+
+        contact_starting_id += 1
+
+        name = input('Upisite naziv firme: ')
+        headquarter = input('Upisite grad sjedista firme: ')
+        company = Company(id=contact_starting_id,
+                          name=name,
+                          headquarter=headquarter,
+                          vat_id='9876543215256897458')
+        print(company)
+        print(company.vat_id)
 
         return
 
