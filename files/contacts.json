@@ -1,74 +1,20 @@
 [
     {
         "id": 1,
-        "first_name": "Pero",
-        "last_name": "PEric",
+        "vat_id": "123456",
         "email": "",
         "phone": "",
-        "web_profile": ""
+        "website": "",
+        "first_name": "Marija",
+        "last_name": "Juric Zagorka"
     },
     {
         "id": 2,
-        "first_name": "Iva",
-        "last_name": "Ivic",
+        "vat_id": "9876543215256897458",
         "email": "",
         "phone": "",
-        "web_profile": ""
-    },
-    {
-        "id": 4,
-        "first_name": "Iva",
-        "last_name": "Ivic",
-        "email": "",
-        "phone": "",
-        "web_profile": ""
-    },
-    {
-        "id": 5,
-        "first_name": "Ivan",
-        "last_name": "Ivic",
-        "email": "",
-        "phone": "",
-        "web_profile": ""
-    },
-    {
-        "id": 6,
-        "first_name": "Ivica",
-        "last_name": "Ivicic",
-        "email": "",
-        "phone": "",
-        "web_profile": ""
-    },
-    {
-        "id": 7,
-        "first_name": "Marko",
-        "last_name": "Maricic",
-        "email": "",
-        "phone": "",
-        "web_profile": ""
-    },
-    {
-        "id": 8,
-        "first_name": "Jakov",
-        "last_name": "Jakovic",
-        "email": "",
-        "phone": "",
-        "web_profile": ""
-    },
-    {
-        "id": 9,
-        "first_name": "Antun",
-        "last_name": "Antunovic",
-        "email": "",
-        "phone": "",
-        "web_profile": ""
-    },
-    {
-        "id": 10,
-        "first_name": "Petar",
-        "last_name": "Peric",
-        "email": "",
-        "phone": "",
-        "web_profile": ""
+        "website": "",
+        "name": "Gricka Vjestica d.o.o.",
+        "headquarter": "Gric"
     }
 ]

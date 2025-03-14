@@ -30,20 +30,19 @@ def main():
         print(company)
         print(company.vat_id)
 
-        return
-
         contact_services.create_contact(contact)
+        contact_services.create_contact(company)
 
         contact_starting_id += 1
 
-        id = 1
-        contact_from_file = contact_services.get_contact(id)
-        if contact_from_file != None:
-            print('Contact from file:', contact_from_file)
-        else:
-            print(f'Ne postoji kontakt u bazi s {id} ID')
+        # id = 1
+        # contact_from_file = contact_services.get_contact(id)
+        # if contact_from_file != None:
+        #     print('Contact from file:', contact_from_file)
+        # else:
+        #     print(f'Ne postoji kontakt u bazi s {id} ID')
 
-        contact_services.delete_contact(3)
+        # contact_services.delete_contact(3)
 
         print()
         next_contact = input('Zelite li dodati novi kontatk? (da/ne): ')
