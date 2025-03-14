@@ -12,7 +12,15 @@ def main():
     while True:
         first_name = input('Upisite ime kontakta: ')
         last_name = input('Upisite prezime kontakta: ')
-        contact = Contact(id=contact_starting_id, first_name=first_name, last_name=last_name)
+        contact = Contact(id=contact_starting_id,
+                          first_name=first_name,
+                          last_name=last_name,
+                          vat_id='123456')
+
+        print(contact)
+        print(contact.vat_id)
+
+        return
 
         contact_services.create_contact(contact)
 
