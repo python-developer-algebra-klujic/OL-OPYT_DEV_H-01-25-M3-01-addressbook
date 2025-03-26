@@ -1,67 +1,61 @@
+from sqlalchemy import Column, ForeignKey, Integer, String, DECIMAL
+from sqlalchemy.orm import relationship, backref
+from app_config import Base
 
 
+class Company(Base):
+    __tablename__ = 'companies'
 
-class Person:
-    def __init__(self,
-                 id: int,
-                 vat_id: str = '',
-                 email: str = '',
-                 phone: str = '',
-                 website: str = ''):
-        self.id = id
-        self.vat_id = vat_id
-        self.email = email
-        self.phone = phone
-        self.website = website
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(length=250), nullable=False)
+    catch_phrase = Column(String(1000), nullable=False)
+    best_sell = Column(String(1000), nullable=False)
 
-        self.check_cro_vat_id()
-
-    def check_cro_vat_id(self):
-        if len(self.vat_id) != 11:
-            print(f'!!! OIB mora imati 11 brojki. Vi ste unijeli: {len(self.vat_id)}.')
+    contacts = relationship('Contact', backref=backref('company'))
 
     def __repr__(self):
-        return f'Person ID: {self.id}.'
+        return f'Company {self.name}'
 
 
+class Geo(Base):
+    __tablename__ = 'geos'
 
-class Contact(Person):
-    def __init__(self,
-                 first_name: str,
-                 last_name: str,
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    latitude = Column(DECIMAL(precision=10, scale=8), nullable=False)
+    longitude = Column(DECIMAL(precision=10, scale=8), nullable=False)
 
-                 id: int,
-                 vat_id: str = '',
-                 email: str = '',
-                 phone: str = '',
-                 website = ''):
-        super().__init__(id=id,
-                         vat_id=vat_id,
-                         email=email,
-                         phone=phone,
-                         website=website)
-
-        self.first_name = first_name
-        self.last_name = last_name
+    addresses = relationship('Address', backref=backref('geo'))
 
     def __repr__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'GEO: {self.latitude}, {self.longitude}'
 
 
-class Company(Person):
-    def __init__(self,
-                 name:str,
-                 headquarter: str,
+class Address(Base):
+    __tablename__ = 'addresses'
 
-                 id: int,
-                 vat_id: str = '',
-                 email: str = '',
-                 phone: str = '',
-                 website: str = ''):
-        super().__init__(id, vat_id, email, phone, website)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    street = Column(String(length=500), nullable=True)
+    suite = Column(String(length=250), nullable=True)
+    city = Column(String(length=250), nullable=False)
+    zip_code = Column(String(length=25), nullable=True)
 
-        self.name = name
-        self.headquarter = headquarter
 
-    def __repr__(self):
-        return f'{self.name} ({self.headquarter})'
+    geo_id = relationship(Geo, ForeignKey('geos.id'))
+    contacts = relationship('Contact', backref=backref('address'))
+    # TODO dodati __repr__ metodu
+
+
+class Contact(Base):
+    __tablename__ = 'contacts'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(250), nullable=False)
+    username = Column(String(500), nullable=False)
+    email = Column(String(500), nullable=False)
+    phone = Column(String(50), nullable=True)
+    website = Column(String(500), nullable=True)
+
+    address_id = relationship(Address, ForeignKey('addresses.id'))
+    company_id = relationship(Company, ForeignKey('companies.id'))
+
+    # TODO dodati __repr__ metodu
