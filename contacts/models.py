@@ -17,6 +17,11 @@ class Company(Base):
         return f'Company {self.name}'
 
 
+class CompanyMapper:
+    pass
+
+
+
 class Geo(Base):
     __tablename__ = 'geos'
 
@@ -30,6 +35,12 @@ class Geo(Base):
         return f'GEO: {self.latitude}, {self.longitude}'
 
 
+class GeoMapper:
+    pass
+
+
+
+
 class Address(Base):
     __tablename__ = 'addresses'
 
@@ -39,10 +50,19 @@ class Address(Base):
     city = Column(String(length=250), nullable=False)
     zip_code = Column(String(length=25), nullable=True)
 
+    geo_id = Column(Integer, ForeignKey('geos.id'))
 
-    geo_id = relationship(Geo, ForeignKey('geos.id'))
     contacts = relationship('Contact', backref=backref('address'))
-    # TODO dodati __repr__ metodu
+
+    def __repr__(self):
+        return f'Address: {self.city}, ({self.zip_code})'
+
+
+class AddressMapper:
+    pass
+
+
+
 
 
 class Contact(Base):
@@ -55,7 +75,12 @@ class Contact(Base):
     phone = Column(String(50), nullable=True)
     website = Column(String(500), nullable=True)
 
-    address_id = relationship(Address, ForeignKey('addresses.id'))
-    company_id = relationship(Company, ForeignKey('companies.id'))
+    address_id = Column(Integer, ForeignKey('addresses.id'))
+    company_id = Column(Integer, ForeignKey('companies.id'))
 
-    # TODO dodati __repr__ metodu
+    def __repr__(self):
+        return f'Contact: {self.name}, ({self.company.name})'
+
+
+class ContactMapper:
+    pass
