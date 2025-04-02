@@ -3,10 +3,18 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-engine = create_engine('sqlite:///databases/contact_manager.db')
+class AppConfig:
+    def __init__(self):
+        self.engine = create_engine('sqlite:///databases/address_book.db')
+        self.session = None
+        self.base = None
 
-Session = sessionmaker(bind=engine)
-session = Session()
+        self.init_data()
 
-Base = declarative_base()
-# Base.metadata.create_all(engine)
+    def init_data(self):
+        Session = sessionmaker(bind=self.engine)
+        self.session = Session()
+
+        self.base = declarative_base()
+
+        self.base.metadata.create_all(self.engine)

@@ -1,9 +1,10 @@
+from app_config import AppConfig
 from contacts.models import Company, Contact
 from contacts.services import ContactServices
 
 
-def main():
-    contact_services = ContactServices()
+def main(config: AppConfig):
+    contact_services = ContactServices(config)
     if len(contact_services.contacts) > 0:
         contact_starting_id = contact_services.contacts[-1].id + 1
     else:
@@ -51,4 +52,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    config = AppConfig()
+    main(config)
