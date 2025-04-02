@@ -95,3 +95,15 @@ class ContactServices:
         )
 
         return temp_contact
+
+
+class ContactApiServices:
+    pass
+
+
+class ContactDbServices:
+    pass
+
+
+class ContactFileServices:
+    pass

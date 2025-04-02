@@ -1,3 +1,4 @@
+import json
 from sqlalchemy import Column, ForeignKey, Integer, String, DECIMAL
 from sqlalchemy.orm import relationship, backref
 from app_config import Base
@@ -16,9 +17,19 @@ class Company(Base):
     def __repr__(self):
         return f'Company {self.name}'
 
-
 class CompanyMapper:
-    pass
+    def from_json(self, company_json: str) -> Company:
+        if isinstance(company_json, dict):
+            return Company(
+                name = company_json['name'],
+                catch_phrase = company_json['catchPhrase'],
+                best_sell = company_json['bs']
+            )
+        else:
+            return None
+
+    def to_json(self, company: Company) -> str:
+        return json.dumps(company.__dict__)
 
 
 
@@ -34,10 +45,18 @@ class Geo(Base):
     def __repr__(self):
         return f'GEO: {self.latitude}, {self.longitude}'
 
-
 class GeoMapper:
-    pass
+    def from_json(self, geo_json: str) -> Geo:
+        if isinstance(geo_json, dict):
+            return Geo(
+                latitude = geo_json['lat'],
+                longitude = geo_json['lng']
+            )
+        else:
+            return None
 
+    def to_json(self, geo: Geo) -> str:
+        return json.dumps(geo.__dict__)
 
 
 
@@ -50,18 +69,27 @@ class Address(Base):
     city = Column(String(length=250), nullable=False)
     zip_code = Column(String(length=25), nullable=True)
 
-    geo_id = Column(Integer, ForeignKey('geos.id'))
+    geo_id = Column(Integer, ForeignKey('geos.id'), nullable=True)
 
     contacts = relationship('Contact', backref=backref('address'))
 
     def __repr__(self):
         return f'Address: {self.city}, ({self.zip_code})'
 
-
 class AddressMapper:
-    pass
+    def from_json(self, address_json: str) -> Address:
+        if isinstance(address_json, dict):
+            return Address(
+                street = address_json['street'],
+                suite = address_json['suite'],
+                city = address_json['city'],
+                zip_code = address_json['zipcode']
+            )
+        else:
+            return None
 
-
+    def to_json(self, address: Address) -> str:
+        return json.dumps(address.__dict__)
 
 
 
@@ -75,12 +103,24 @@ class Contact(Base):
     phone = Column(String(50), nullable=True)
     website = Column(String(500), nullable=True)
 
-    address_id = Column(Integer, ForeignKey('addresses.id'))
-    company_id = Column(Integer, ForeignKey('companies.id'))
+    address_id = Column(Integer, ForeignKey('addresses.id'), nullable=True)
+    company_id = Column(Integer, ForeignKey('companies.id'), nullable=True)
 
     def __repr__(self):
         return f'Contact: {self.name}, ({self.company.name})'
 
-
 class ContactMapper:
-    pass
+    def from_json(self, contact_json: str) -> Contact:
+        if isinstance(contact_json, dict):
+            return Contact(
+                name = contact_json['name'],
+                username = contact_json['username'],
+                email = contact_json['email'],
+                phone = contact_json['phone'],
+                website = contact_json['website']
+            )
+        else:
+            return None
+
+    def to_json(self, contact: Contact) -> str:
+        return json.dumps(contact.__dict__)
