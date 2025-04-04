@@ -1,6 +1,5 @@
 from app_config import AppConfig
-from contacts.models import Company, Contact
-from contacts.services import ContactServices
+from features import Contact, Company, ContactServices
 
 
 def main(config: AppConfig):

@@ -1,6 +1,6 @@
 import json
 from typing import List
-from contacts.models import Contact
+from features.contacts.models import Contact
 from repositories.file_repository import FileRepository
 
 
@@ -38,7 +38,7 @@ class ContactServices:
             try:
                 with open('files/contacts.json', 'r') as file_reader:
                     contacts_from_file = json.load(file_reader)
-                    self.contacts = list(map(lambda contact_dict: self.map_dict_to_contact(contact_dict),
+                    self.contacts = list(map(lambda contact_dict: self._map_dict_to_contact(contact_dict),
                                              contacts_from_file))
             except Exception as ex:
                 print(f'Dogodila se greska u ContactServices.get_all_contacts() citanje iz filea. {ex}.')
@@ -84,7 +84,7 @@ class ContactServices:
 
 
 
-    def map_dict_to_contact(self, contact_dict) -> Contact:
+    def _map_dict_to_contact(self, contact_dict) -> Contact:
         temp_contact = Contact(
             id = contact_dict['id'],
             first_name = contact_dict['first_name'],
